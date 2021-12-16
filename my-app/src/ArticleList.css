@@ -1,0 +1,22 @@
+body{
+  padding:10px 40px;
+}
+ul.article-list{
+  padding:0;
+  list-style-position: inside;
+  list-style: none;
+  width:50%;
+}
+ul.article-list li:nth-child(odd){
+  background-color: olivedrab;
+}
+ul.article-list li:nth-child(even){
+  background-color: orangered;
+}
+ul.article-list a{
+  color:#000;
+  font-size:21px;
+  text-decoration: none;
+  padding:10px;
+  display: flex;
+}

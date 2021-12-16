@@ -1,0 +1,36 @@
+body{
+    background-color: honeydew;
+}
+.field-class{
+    display: flex;
+    width:600px;
+    margin:20px 0;
+}
+.field-class label{
+    font-size: 21px;
+    width:150px;
+}
+.field-class .text-field{
+    font-size: 21px;
+    width:250px;
+}
+.field-class .button.green{
+    background-color: olivedrab;
+    color:#fff;
+    padding:10px 50px;
+    margin-right:20px;
+    border:none;
+    font-size:15px;
+    text-decoration: none;
+}
+.field-class .button.red{
+    background-color: orangered;
+    color:#fff;
+    padding:10px 50px;
+    margin-right:20px;
+    border:none;
+    font-size:15px;
+}
+.field-class h1{
+    margin:0 20px 0 0;
+}
