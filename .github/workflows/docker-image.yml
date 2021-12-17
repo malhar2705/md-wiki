@@ -18,6 +18,9 @@ jobs:
       run:  docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
     - name: Build the Docker image md-wiki:2019
       run: | 
-        docker build -t malhar2705/md-wiki:2019 .
-        docker push malhar2705/md-wiki:2019
+        docker build -t ${{ secrets.DOCKER_USER }}/md-wiki:2019 .
+        docker push ${{ secrets.DOCKER_USER }}/md-wiki:2019
+    - name: Run a container
+      run: docker run --rm -it ${{ secrets.DOCKER_USER }}/md-wiki:2019
+    
       
