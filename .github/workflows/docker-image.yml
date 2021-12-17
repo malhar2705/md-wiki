@@ -13,18 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/build-push@v1
-    - name: docker login
-      run:  docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
-    - name: Build the Docker image md-wiki:2019
-      with:
-        context: ./
-        file: ./Dockerfile
-        push: true
-        tags: ${{ secrets.DOCKER_USER }}/md-wiki:2019
-
-    - name: Run the image in container
-    - uses: actions/run-container@v1
-      with: 
-        image: ${{ secrets.DOCKER_USER }}/md-wiki:2019
-        run: echo "Running the docker image"
+      - uses: actions/checkout@v2
+      - name: Build the stack
+        run:  docker build . --file Dockerfile --tag md-wiki:2019
+      - name: Test
+        run: docker run -ti -p 8080:9090 md-wiki:2019
