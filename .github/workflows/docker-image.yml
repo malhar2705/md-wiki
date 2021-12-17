@@ -20,7 +20,4 @@ jobs:
       run: | 
         docker build -t ${{ secrets.DOCKER_USER }}/md-wiki:2019 .
         docker push ${{ secrets.DOCKER_USER }}/md-wiki:2019
-    - name: Run a container
-      run: docker run --rm -it malhar2705/md-wiki:2019
-    
       
