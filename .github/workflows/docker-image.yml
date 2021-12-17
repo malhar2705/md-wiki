@@ -1,0 +1,23 @@
+name: md-wiki:2019
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      run:  docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+    - name: Build the Docker image md-wiki:2019
+      run: | 
+        docker build -t malhar2705/md-wiki:2019 .
+        docker push malhar2705/md-wiki:2019
+      
