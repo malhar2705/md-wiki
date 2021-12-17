@@ -13,8 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Build the stack
-        run:  docker build . --file Dockerfile --tag md-wiki:2019
-      - name: Test
-        run: docker run -ti -p 8080:9090 md-wiki:2019
+    - uses: actions/checkout@v2
+    - name: docker login
+      run:  docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+    - name: Build the Docker image md-wiki:2019
+      run: docker build . --file Dockerfile --tag md-wiki:2019
+    - name: Push docker image
+      run: docker push md-wiki:2019
