@@ -15,8 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: docker login
-      run:  docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASS }}
+      run:  docker login -u ${{ secrets.DOCKER_USER }} -p --password-stdin
     - name: Build the Docker image md-wiki:2019
-      run: docker build . --file Dockerfile --tag md-wiki:2019
-    - name: Push docker image
-      run: docker push md-wiki:2019
+      run: | 
+        docker build -t malhar2705/md-wiki:2019 .
+        docker push malhar2705/md-wiki:2019
+      
