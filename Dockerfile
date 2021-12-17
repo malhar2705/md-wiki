@@ -8,7 +8,7 @@ COPY readme-docker.txt ./
 COPY my-app/ ./my-app/
 COPY my-app/src/ ./my-app/src/
 COPY my-app/public/ ./my-app/public/
-RUN  cd my-app && npm install && npm run build
+RUN  cd my-app && npm install && npm run build 
 
 FROM node:14 AS server-build
 
