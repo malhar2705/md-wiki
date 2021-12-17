@@ -27,5 +27,4 @@ jobs:
     - uses: actions/run-container@v1
       with: 
         image: ${{ secrets.DOCKER_USER }}/md-wiki:2019
-        run: |
-          echo "Running the docker image"
+        run: echo "Running the docker image"
