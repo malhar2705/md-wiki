@@ -7,9 +7,26 @@ import './ArticleList.css';
 
 
 const EditDetail = (onChangeForm, editDetailArticle) => {
-  async function editDetailArticle(data){
+  
+  //const [name, setArticleName] = useState('');
+  const [desc, setArticleDesc] = useState('');
+  const { name } = useParams();
+  function editDetailArticle(data){
     console.log(data);
   }
+
+  const updateAPIData = () => {
+    axios.put(`/articles/${name}`, {
+      "name":name,  
+      "desc":desc
+    }).then((response)=>{
+      console.log(response);
+      window.location.href = '/';
+    }).catch((error)=>{
+      console.log("Description should be 10 chars long");
+    });
+  }
+
   const [ArticlesJSON, setAPIData] = useState([]);
   useEffect(() => {
       axios.get(`/articles`)
@@ -18,16 +35,16 @@ const EditDetail = (onChangeForm, editDetailArticle) => {
               setAPIData(response.data);
           })
   }, []);
-  const { name } = useParams();
+
   let selectedData = ArticlesJSON.find(item=>item.name===name);
   if(selectedData){
     return (
       <div>
         <h1>Edit Article: {selectedData.name}</h1>
         <form>
-          <div className="field-class"><label>Name:</label><input name="articleName" id="articleName" onChange={(e)=>onChangeForm(e)} className="text-field" type="text" value={selectedData.name} /></div>
-          <div className="field-class"><label>Description:</label><input name="articleDesc" id="articleDesc" onChange={(e)=>onChangeForm(e)} className="text-field" type="text" value={selectedData.desc} /></div>
-          <div className="field-class"><input onClick={(e)=>editDetailArticle()} type="button" className="button green" value="Submit"></input> <input className="button red" type="button" value="Cancel"></input></div>
+          <div className="field-class"><label>Name:</label><input name="articleName" id="articleName" className="text-field" type="text" value={selectedData.name} /></div>
+          <div className="field-class"><label>Description:</label><input onChange={(e) => setArticleDesc(e.target.value)} name="articleDesc" id="articleDesc" className="text-field" type="text" defaultValue={selectedData.desc} /></div>
+          <div className="field-class"><input type="button" className="button green" onClick={updateAPIData} value="Submit"></input> <input onClick={event =>  window.location.href='/'} className="button red" type="button" value="Cancel"></input></div>
         </form>
       </div>
     );
