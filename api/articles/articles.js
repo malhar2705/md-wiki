@@ -32,6 +32,7 @@ router.post('/', (req,res)=>{
 
 //GET ARTICLE BY ID
 router.get('/:name',(req,res)=>{
+  
   const foundArticle = wiki.find(( article ) => article.name === req.params.name );
   if(foundArticle){
     res.send(foundArticle);
@@ -44,7 +45,9 @@ router.get('/:name',(req,res)=>{
 router.put('/:name', (req,res)=>{
 
   const { error } = validArticle.validateArticles(req.body);
-  
+  if(error){
+    return res.status(400).send("Name should be 3 chars long and Description should be 10 chars long");
+  }
   const foundArticle = wiki.find( (article) => article.name === req.params.name );
 
   if(foundArticle){
